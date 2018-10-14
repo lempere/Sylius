@@ -31,6 +31,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     public const DEFAULT_CURRENCY_CODE = 'USD';
     public const DEFAULT_ZONE_NAME = 'United States';
     public const DEFAULT_CHANNEL_NAME = 'United States';
+    public const DEFAULT_CHANNEL_COLOR = 'Linen';
 
     /**
      * @var RepositoryInterface
@@ -129,7 +130,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     /**
      * {@inheritdoc}
      */
-    public function create(?string $code = null, ?string $name = null, ?string $currencyCode = null): array
+    public function create(?string $code = null, ?string $name = null, ?string $currencyCode = null, ?string $color = null): array
     {
         $currency = $this->provideCurrency($currencyCode);
         $locale = $this->provideLocale();
@@ -140,6 +141,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         $channel->addLocale($locale);
         $channel->setDefaultLocale($locale);
         $channel->setTaxCalculationStrategy('order_items_based');
+        $channel->setColor($color ?? self::DEFAULT_CHANNEL_COLOR);
 
         $defaultData = [
             'channel' => $channel,
